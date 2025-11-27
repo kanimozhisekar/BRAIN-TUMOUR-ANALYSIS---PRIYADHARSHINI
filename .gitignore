@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+__pycache__/
+*.pyc
+.env
+.venv
+venv/
+*.pth
+*.h5
+*.pkl
+*.npy
+*.npz
+.DS_Store
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Local development
+.DS_Store
+Thumbs.db
+
+# Netlify
+.netlify/
+
+# Large files
+data/
+*.h5
+*.hdf5
+*.pth
+*.pkl
+*.pth
+*.pt
+*.bin
+*.npy
+*.npz

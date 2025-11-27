@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - Brain Tumor Analysis</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
+    <meta name="description" content="About our AI-powered brain tumor detection system" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="header-nav">
+            <div class="logo"><a href="/">🧠 Brain Tumor Analysis</a></div>
+            <div class="nav-links">
+                <a href="/">Analysis</a>
+                <a href="/about" class="active">About</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" style="padding: 48px 20px;">
+        <div class="card">
+            <h1>About Brain Tumor Analysis</h1>
+            <p>This AI-powered system uses a Vision Transformer (ViT) to analyze MRI brain scans and detect tumors.</p>
+            
+            <h2>Features</h2>
+            <ul>
+                <li><strong>AI Detection:</strong> Identifies glioma, meningioma, pituitary tumors, or no tumor</li>
+                <li><strong>Tumor Localization:</strong> Uses Grad-CAM to highlight suspicious regions</li>
+                <li><strong>Treatment Suggestions:</strong> Evidence-based guidance (no prognosis)</li>
+                <li><strong>PDF Reports:</strong> Download detailed analysis with images</li>
+            </ul>
+
+            <h2>Technology</h2>
+            <p><strong>Model:</strong> Vision Transformer (ViT-B-16)</p>
+            <p><strong>Visualization:</strong> Grad-CAM for tumor highlighting</p>
+            <p><strong>Localization:</strong> Automated lobe and hemisphere estimation</p>
+
+            <h2>Disclaimer</h2>
+            <p>This tool is for research and educational purposes. It does not replace clinical evaluation. Always consult healthcare professionals for medical decisions.</p>
+
+            <h2>Support</h2>
+            <p>If you encounter issues or have questions, please contact the development team.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container small">
+            <p>This tool provides decision support only and is not a medical diagnosis. Consult a clinician for interpretation.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+

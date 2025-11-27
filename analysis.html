@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analysis - Brain Tumor Analysis</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script defer src="/static/app.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="description" content="AI-powered brain tumor analysis with MRI scans" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="header-nav">
+            <div class="logo"><a href="/">🧠 Brain Tumor Analysis</a></div>
+            <div class="nav-links">
+                <a href="/analysis" class="active">Analysis</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="page-title-section">
+            <h1>Upload Brain MRI for Analysis</h1>
+            <p class="page-subtitle">Upload a brain MRI scan to get AI-powered tumor detection, localization, and treatment recommendations</p>
+        </div>
+
+        <section class="card upload-card">
+            <h2 class="section-header">📤 Upload Image</h2>
+            <form id="upload-form">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="image" name="image" accept="image/*" required class="file-input" />
+                    <button type="submit" id="submit-btn" class="primary-btn">🔍 Analyze</button>
+                </div>
+            </form>
+            <div id="status" class="status"></div>
+        </section>
+
+        <!-- Risk meter below the prediction results container -->
+        <section class="card risk-card" id="risk-section" style="margin-top: 16px;">
+            <div class="risk-header">
+                <span id="risk-label">Risk level</span>
+                <span id="risk-percent">0%</span>
+            </div>
+            <div class="risk-meter">
+                <div class="risk-fill" id="risk-fill" style="width: 0%;"></div>
+            </div>
+            <div class="risk-caption" id="risk-caption">—</div>
+        </section>
+        
+
+        <section class="results-section grid">
+            <div class="card prediction-card">
+                <h2 class="section-header">📊 Prediction Results</h2>
+                <div class="kv">
+                    <div class="k">TUMOR TYPE</div>
+                    <div class="v"><span id="prediction">—</span></div>
+                </div>
+                <div class="kv">
+                    <div class="k">CONFIDENCE SCORE</div>
+                    <div class="v" id="confidence">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">RISK LEVEL</div>
+                    <div class="v"><span id="risk-badge" class="pill" style="display:inline-block;">—</span></div>
+                </div>
+                <div class="kv">
+                    <div class="k">RISK NOTE</div>
+                    <div class="v" id="risk-note">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">LOCATION</div>
+                    <div class="v" id="localization">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">DIAGNOSIS</div>
+                    <div class="v" id="diagnostic">—</div>
+                </div>
+                <div class="kv">
+                    <div class="k">TREATMENT SUGGESTION</div>
+                    <div class="v" id="treatment">—</div>
+                </div>
+                <div class="highlights" id="highlights"></div>
+            </div>
+
+            <div class="card visualization-card">
+                <h2 class="section-header">🎯 Grad-CAM Visualization</h2>
+                <div class="image-wrap">
+                    <img id="gradcam" alt="Grad-CAM overlay will appear here" style="display: none;" />
+                </div>
+                <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <button type="button" id="flip-btn" class="secondary-btn" style="width: 100%;">↔️ Flip View</button>
+                    <button type="button" id="download-btn" class="secondary-btn" style="display: none; width: 100%;">📥 Download PDF Report</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Comparison charts: shown after analysis -->
+        <section class="card" id="charts-section" style="display:none; margin-top: 16px;">
+            <h2 class="section-header">📈 Report Parameters Comparison</h2>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:center;">
+                <div>
+                    <h3 style="margin:0 0 8px;">Lab Report Parameters</h3>
+                    <canvas id="labChart" width="800" height="780"></canvas>
+                </div>
+                <div>
+                    <h3 style="margin:0 0 8px;">My Report Parameters</h3>
+                    <canvas id="myChart" width="800" height="780"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Brain Tumor Analysis</h4>
+                    <p>AI-powered diagnostic tool using Vision Transformers and Grad-CAM for precise brain tumor detection.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="/">Home</a>
+                    <a href="/analysis">Analysis</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Disclaimer</h4>
+                    <p>This tool provides decision support only and is not a medical diagnosis. Always consult healthcare professionals.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Brain Tumor Analysis. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

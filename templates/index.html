@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brain Tumor Analysis</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/dashboard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🧠</text></svg>">
+    <meta name="description" content="AI-powered brain tumor detection using Vision Transformers" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <a href="/">🧠 Brain Tumor Analysis</a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/" class="active dashboard-btn">
+                    <i class="fas fa-home"></i> 
+                    <span>Dashboard</span>
+                    <span class="nav-badge">Home</span>
+                </a>
+                <a href="/analysis" class="bold-nav-item"><i class="fas fa-chart-line"></i> <b>New Analysis</b></a>
+                <a href="#" id="reports-link" class="bold-nav-item"><i class="fas fa-file-medical"></i> <b>Patient Reports</b></a>
+                <a href="#" id="patients-link" class="bold-nav-item"><i class="fas fa-users"></i> <b>Patients</b></a>
+                <a href="#" id="settings-link"><i class="fas fa-cog"></i> Settings</a>
+                
+                <!-- Prominent Chat Button -->
+                <!-- Prominent Action Buttons in Sidebar -->
+                <div class="sidebar-buttons">
+                    <a href="#" class="sidebar-btn primary-btn" id="sidebar-dashboard-btn">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Patient Dashboard</span>
+                    </a>
+                    <a href="#" class="sidebar-btn secondary-btn" id="sidebar-chat-btn">
+                        <i class="fas fa-comment-medical"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="header-title-section" style="display: flex; align-items: center; gap: 24px; flex-shrink: 0;">
+                    <h1>Brain Tumor Analysis</h1>
+                    <nav class="header-nav-links" style="display: flex !important; align-items: center; gap: 12px; flex-shrink: 0; visibility: visible !important; opacity: 1 !important;">
+                        <a href="/" class="header-nav-link" id="header-dashboard-link" style="display: inline-block !important; visibility: visible !important; opacity: 1 !important; color: #4b5563 !important; font-weight: 600 !important; font-size: 15px !important; padding: 6px 12px !important; text-decoration: none !important; white-space: nowrap !important;">Dashboard</a>
+                        <a href="/analysis" class="header-nav-link" id="header-analysis-link" style="display: inline-block !important; visibility: visible !important; opacity: 1 !important; color: #4b5563 !important; font-weight: 600 !important; font-size: 15px !important; padding: 6px 12px !important; text-decoration: none !important; white-space: nowrap !important;">Analysis</a>
+                        <a href="#" class="header-nav-link" id="header-ai-assistant-link" style="display: inline-block !important; visibility: visible !important; opacity: 1 !important; color: #4b5563 !important; font-weight: 600 !important; font-size: 15px !important; padding: 6px 12px !important; text-decoration: none !important; white-space: nowrap !important;">AI Assistant</a>
+                    </nav>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search patients, reports..." />
+                </div>
+                <div class="top-actions">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Key Stats -->
+            <section class="stats-section container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Tumor Types Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">95%+</div>
+                        <div class="stat-label">Detection Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Grad-CAM</div>
+                        <div class="stat-label">Visual Localization</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Instant</div>
+                        <div class="stat-label">Analysis Time</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content -->
+            <!-- Patient Dashboard Section -->
+            <section class="dashboard-section">
+                <div class="dashboard-header">
+                    <h2><i class="fas fa-user-md"></i> Patient Dashboard</h2>
+                    <button class="btn btn-primary" id="add-patient-btn">
+                        <i class="fas fa-plus"></i> Add New Patient
+                    </button>
+                </div>
+                
+                <!-- Patient Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">1,248</div>
+                        <div class="stat-label">Total Patients</div>
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">42</div>
+                        <div class="stat-label">New This Month</div>
+                        <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">86%</div>
+                        <div class="stat-label">Recovery Rate</div>
+                        <div class="stat-icon"><i class="fas fa-heartbeat"></i></div>
+                    </div>
+                </div>
+
+                <!-- Recent Patients Table -->
+                <div class="recent-patients">
+                    <div class="section-header">
+                        <h3><i class="fas fa-list"></i> Recent Patients</h3>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="patients-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient ID</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Condition</th>
+                                    <th>Last Visit</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-patients-list">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="main-content container">
+                <h2 class="section-title">Brain Tumor Facts</h2>
+
+                <div class="facts-grid">
+                    <div class="fact-card">
+                        <div class="fact-number">1 Million+</div>
+                        <div class="fact-label">Americans are living with a brain tumor</div>
+                    </div>
+                    <div class="fact-card">
+                        <div class="fact-number">94,390</div>
+                        <div class="fact-label">Americans receive a primary brain tumor diagnosis each year</div>
+                    </div>
+                    <div class="fact-card">
+                        <div class="fact-number">Over 100</div>
+                        <div class="fact-label">Different types of primary brain tumors exist</div>
+                    </div>
+                    <div class="fact-card">
+                        <div class="fact-number">Early</div>
+                        <div class="fact-label">Detection significantly improves treatment outcomes</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Frequently Asked Questions</h2>
+
+                <div class="quick-facts-accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>What types of brain tumors can the AI detect?</span>
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Our Vision Transformer model can detect four categories:</p>
+                            <ul>
+                                <li><strong>Glioma:</strong> Primary brain tumors arising from glial cells</li>
+                                <li><strong>Meningioma:</strong> Tumors arising from the meninges</li>
+                                <li><strong>Pituitary:</strong> Tumors in the pituitary gland</li>
+                                <li><strong>No tumor:</strong> Normal brain scans</li>
+                            </ul>
+                            <p>The AI analyzes MRI images and provides a classification with confidence scores for each category.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>How does Grad-CAM show tumor location?</span>
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Grad-CAM (Gradient-weighted Class Activation Mapping) creates a visual heatmap overlay on your MRI scan, highlighting the regions that most influenced the AI's diagnosis.</p>
+                            <p>This heatmap shows:</p>
+                            <ul>
+                                <li>Exact areas where the tumor is detected</li>
+                                <li>Brain lobe and hemisphere (frontal, parietal, temporal, or occipital)</li>
+                                <li>Intensity of activation areas</li>
+                            </ul>
+                            <p>The system also provides a bounding box around the most suspicious region and generates a binary mask of the detected areas.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>What treatment recommendations are provided?</span>
+                            <span class="accordion-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Based on the detected tumor type, the system provides evidence-based treatment suggestions:</p>
+                            <ul>
+                                <li><strong>Glioma:</strong> Biopsy for profiling, surgical resection, radiotherapy/temozolomide based on grade and markers</li>
+                                <li><strong>Meningioma:</strong> Surgical resection or stereotactic radiosurgery, with 3-6 month MRI follow-ups</li>
+                                <li><strong>Pituitary:</strong> Transsphenoidal resection, endocrinology management, and hormone follow-up</li>
+                                <li><strong>No tumor:</strong> No treatment needed - routine follow-up only</li>
+                            </ul>
+                            <p><em>Note: These are general recommendations. Always consult healthcare professionals for personalized treatment plans.</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-box">
+                    <h3>Ready to Analyze?</h3>
+                    <p>Upload a brain MRI scan to get started with AI-powered tumor detection.</p>
+                    <a href="/analysis" class="cta-button">Start Analysis</a>
+                </div>
+
+                
+                <h2 class="section-title">How It Works</h2>
+                <section class="how-it-works container">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Upload MRI</h3>
+                            <p>Provide a brain MRI slice image in JPG/PNG format. Your file remains on your device during analysis.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>AI Classification</h3>
+                            <p>Our Vision Transformer (ViT‑B/16) predicts tumor type with calibrated confidence and localizes the hotspot.</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Report & Guidance</h3>
+                            <p>Download a PDF report including risk level, Grad‑CAM visualization, and concise treatment guidance.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <h2 class="section-title">Privacy & Safety</h2>
+                <section class="container">
+                    <ul>
+                        <li>Files are processed on this app; no public sharing is performed.</li>
+                        <li>Reports are for clinical decision support and not a diagnosis.</li>
+                        <li>Always consult qualified healthcare professionals for treatment decisions.</li>
+                    </ul>
+                </section>
+
+                <h2 class="section-title">Sample Report</h2>
+                <section class="container">
+                    <p>See the complete workflow by running an analysis and downloading the patient‑friendly PDF report from the results page.</p>
+                    
+                    <div class="dashboard-grid">
+                        <!-- Stats Overview -->
+                        <div class="stats-card">
+                            <h3>Today's Activity</h3>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="total-patients">0</span>
+                                    <span class="stat-label">Total Patients</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="reports-today">0</span>
+                                    <span class="stat-label">Reports Today</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="pending-reports">0</span>
+                                    <span class="stat-label">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Reports -->
+                        <div class="recent-reports">
+                            <div class="section-header">
+                                <h3>Recent Reports</h3>
+                                <a href="#" class="view-all">View All</a>
+                            </div>
+                            <div class="reports-list" id="reports-list">
+                                <!-- Reports will be populated by JavaScript -->
+                                <div class="empty-state">
+                                    <i class="fas fa-folder-open"></i>
+                                    <p>No recent reports found</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Chart -->
+                        <div class="chart-container">
+                            <h3>Monthly Analysis</h3>
+                            <canvas id="analysisChart"></canvas>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="quick-actions">
+                            <h3>Quick Actions</h3>
+                            <div class="action-buttons">
+                                <button type="button" class="action-btn" id="new-report">
+                                    <i class="fas fa-plus"></i>
+                                    <span>New Report</span>
+                                </button>
+                                <button type="button" class="action-btn" id="import-scan">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Import Scan</span>
+                                </button>
+                                <button type="button" class="action-btn" id="export-data">
+                                    <i class="fas fa-download"></i>
+                                    <span>Export Data</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Chatbot Widget -->
+        <div class="chatbot-widget" id="chatbot-widget">
+            <div class="chatbot-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="chatbot-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="chatbot-info">
+                        <h4>Medical Assistant</h4>
+                    </div>
+                </div>
+                <button type="button" id="chatbot-close" class="chatbot-close-btn" style="background: rgba(255,255,255,0.2); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; transition: all 0.2s;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="chatbot-message bot">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-sender">AI Assistant</div>
+                        <div class="message-text">Hello! I'm your AI medical assistant. I can help you with:
+                            <ul>
+                                <li>Brain tumor information</li>
+                                <li>Analysis results explanation</li>
+                                <li>Treatment options</li>
+                                <li>Patient queries</li>
+                            </ul>
+                            How can I assist you today?
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <div class="chatbot-suggestions" id="chatbot-suggestions">
+                    <button class="suggestion-btn">What are common brain tumor symptoms?</button>
+                    <button class="suggestion-btn">Explain my patient's MRI results</button>
+                    <button class="suggestion-btn">Latest treatment options</button>
+                </div>
+                <div id="uploaded-report-indicator" style="display: none; padding: 8px 12px; background: #e3f2fd; border-radius: 8px; margin-bottom: 8px; font-size: 13px; color: #1976d2;">
+                    <i class="fas fa-file-pdf"></i> <span id="uploaded-report-name"></span>
+                    <button type="button" id="remove-report-btn" style="float: right; background: none; border: none; color: #1976d2; cursor: pointer; padding: 0 8px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="chatbot-input">
+                    <input type="file" id="chatbot-file-upload" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display: none;" />
+                    <button type="button" class="emoji-btn" id="chatbot-upload-btn" title="Upload Report" style="background: none; border: none; color: var(--muted); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; pointer-events: auto; z-index: 100;">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="emoji-btn" id="emoji-btn">
+                        <i class="far fa-smile"></i>
+                    </button>
+                    <input type="text" id="chatbot-input" placeholder="Type your medical question or upload a report..." />
+                    <button type="button" id="chatbot-send" class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- Close dashboard-container -->
+
+    
+    <!-- Load scripts at the end of body -->
+    <script src="/static/dashboard.js"></script>
+    <script src="/static/chatbot.js"></script>
+    <script src="/static/home.js"></script>
+    <script src="/static/button-handler.js"></script>
+</body>
+</html>
